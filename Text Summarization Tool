@@ -1,0 +1,33 @@
+# Importing the pipeline function from Hugging Face's transformers library
+# This helps us use pre-trained models easily
+from transformers import pipeline
+
+# This function takes a long text and returns a summarized version of it
+def summarize_text(text):
+    # Create a summarization pipeline using a default pre-trained model
+    summarizer = pipeline("summarization")
+
+    # Generate the summary (you can tweak max_length and min_length as needed)
+    summary = summarizer(text, max_length=60, min_length=20, do_sample=False)
+
+    # Return only the summary text from the result
+    return summary[0]['summary_text']
+
+# This block will run only when the script is executed directly
+if __name__ == "__main__":
+    # Print a nice heading
+    print("🔹 Text Summarization using Hugging Face Transformers 🔹\n")
+
+    # Ask the user to enter the text they want to summarize
+    text = input("Enter the text you want to summarize:\n\n")
+
+    # Call the summarize function with the user input
+    summary = summarize_text(text)
+
+    # Print the original input text
+    print("\n--- Original Text ---\n")
+    print(text)
+    
+    # Print the summary generated
+    print("\n--- Summary ---\n")
+    print(summary)
